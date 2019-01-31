@@ -2,6 +2,7 @@
 
 from pyzabbix import ZabbixAPI
 import os
+
 # informaçoes do zabbix server
 url = os.environ.get("ZABBIX_URL")
 user= os.environ.get("ZABBIX_USER")
