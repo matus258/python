@@ -11,9 +11,4 @@ response = ec2.describe_instances()
 #   print(key)
 #print(json.dumps(response.get('Reservations')[0].get('Instances')[0].get('Tags')[1].get('Key'), indent=2, default=str))
 
-test = response.get('Reservations')[0].get('Instances')[0].get('Tags')[1].get('Key')
-
-if test == "Name":
-    print("1")
-else:
-    print("0")
+print(json.dumps(response.get('Reservations')[0].get('Instances')[0].get('NetworkInterfaces')[0].get('PrivateIpAddress'), indent=2, default=str))

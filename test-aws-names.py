@@ -35,7 +35,8 @@ for zab in zapi.host.get():
                 if key=="Name":
                     name.insert(cont, response.get('Reservations')[i].get('Instances')[ins].get('Tags')[tag].get('Value'))
                     if zab['host'] == name[cont]:
-                        print(name[cont])  
+                        print(name[cont])
+  
                     cont += 1
                             
 

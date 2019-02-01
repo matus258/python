@@ -16,24 +16,25 @@ senha = os.environ.get("ZABBIX_PASS")
 zapi=ZabbixAPI(url)
 zapi.login(user, senha)
 
-
+# Pegando o tamanho da lista Reservations
 res_tam = len(response.get('Reservations'))
-cont=0
-name = list()
-
-for zab in zapi.host.get():
-
-    for i in range(res_tam):
-        ins_tam =len(response.get('Reservations')[i].get('Instances'))
-        for ins in range(ins_tam):
-
-            print(json.dumps(response.get('Reservations')[i].get('Instances')[ins], indent=2, default=str))
-            tag_tam = len(response.get('Reservations')[i].get('Instances')[ins].get('Tags'))
-            #for tag in range(tag_tam):
-             #   key=response.get('Reservations')[i].get('Instances')[ins].get('Tags')[tag].get('Key')
-
-              #  if key=="Name":
-               #     name.insert(cont, response.get('Reservations')[i].get('Instances')[ins].get('Tags')[tag].get('Value'))
-                #    if zab['host'] == name[cont]:
-                 #       print(name[cont])  
-                  #  cont += 1
+# Passar por cada Reservation
+for res in range(res_tam):
+    # Pegando o tamanho da Lista de instancias
+    ins_tam =len(response.get('Reservations')[res].get('Instances'))
+    # Passar por cada Instancia
+    for ins in range(ins_tam):
+        # Pegando o tamanho da lista NetworkInterfaces
+        net_tam = len(response.get('Reservations')[res].get('Instances')[ins].get('NetworkInterfaces'))
+        # Fazaendo uma condição para ignorar as instancias que não tem nada na lista NetworkInterfaces
+        if net_tam != 0:
+            # Passar por cada hostinterface do zabbix
+            for zab in zapi.hostinterface.get():
+                # Guardar o ip do host
+                ip_zab = zab['ip']
+                # Guardar o ip da ec2 da aws
+                ip_aws=response.get('Reservations')[res].get('Instances')[ins].get('NetworkInterfaces')[0].get('PrivateIpAddress')
+                # Se o ip da aws for igual ao do zabbix; retornar o ip
+                if ip_aws == ip_zab:
+                    print(ip_aws)
+            
