@@ -3,7 +3,6 @@
 from pyzabbix import ZabbixAPI
 import os
 import boto3
-import boto3
 import json
 
 
