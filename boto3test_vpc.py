@@ -11,4 +11,4 @@ response = ec2.describe_instances()
 #   print(key)
 #print(json.dumps(response.get('Reservations')[0].get('Instances')[0].get('Tags')[1].get('Key'), indent=2, default=str))
 
-print(json.dumps(response.get('Reservations'), indent=2, default=str))
+print(json.dumps(response.get('Reservations')[0].get('Instances')[0].get('NetworkInterfaces')[0], indent=2, default=str))

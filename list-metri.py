@@ -10,9 +10,11 @@ for region in regions:
     cloudwatch = boto3.client('cloudwatch', region_name=region )
 
     # List metrics through the pagination interface
-    paginator = cloudwatch.get_paginator('list_metrics')
-    for response in paginator.paginate(Dimensions=[{'Name':'VpnId'}], Namespace='AWS/VPN', MetricName='TunnelState'):
-    
-        res.append(response)
+    response = cloudwatch.list_metrics(Namespace='AWS/VPN', MetricName='TunnelDataIn')
+    for met in response['Metrics']:
+        #print(met.get('Dimensions'))
+        for dim in met.get('Dimensions'):
+            if dim['Name'] == 'VpnId':
+                print(dim['Value'])
 
-print(json.dumps(res, indent=2, default=str))        
+#print(json.dumps(res, indent=2, default=str))        
