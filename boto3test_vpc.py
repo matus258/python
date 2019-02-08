@@ -2,13 +2,15 @@
 
 import boto3
 import json
-
+ 
 ec2 = boto3.client('ec2')
-response = ec2.describe_instances()
-#print(json.dumps(response.get('ResponseMetadata').get('HTTPStatusCode'), indent=2, default=str))
-#str(1) # '1'
-#for key in response.get('Reservations')[0].get('Instances')[0].get('State'):
-#   print(key)
-#print(json.dumps(response.get('Reservations')[0].get('Instances')[0].get('Tags')[1].get('Key'), indent=2, default=str))
-
-print(json.dumps(response.get('Reservations')[0].get('Instances')[0].get('NetworkInterfaces')[0], indent=2, default=str))
+resp = ec2.describe_instances()
+response = ec2.describe_internet_gateways()
+#print(json.dumps(response.get('InternetGateways'), indent=2))
+#for inter_gat in response.get('InternetGateways'):
+    #print(json.dumps(inter_gat, indent=2))
+    #print(json.dumps(inter_gat.get('InternetGatewayId'), indent=2))
+    #for vpc in inter_gat.get('Attachments'):
+        #print(json.dumps(vpc['VpcId'], indent=2))
+for aws in resp.get('Reservations').get('Instances')[0]:
+        print(aws)

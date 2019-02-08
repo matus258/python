@@ -5,9 +5,9 @@ import json
 from datetime import datetime
 now = datetime.now()
 
-if now.month-1 == 1:
+if now.month == 1:
 
-    start_time = datetime(now.year-1,now.month-1+11,now.day)
+    start_time = datetime(now.year-1,now.month+11,now.day)
 else:
     start_time=datetime(now.year,now.month-1,now.day)
 

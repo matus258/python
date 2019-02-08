@@ -9,10 +9,9 @@ res = list()
 for region in regions:
     cloudwatch = boto3.client('cloudwatch', region_name=region )
 
-    # List metrics through the pagination interface
+
     response = cloudwatch.list_metrics(Namespace='AWS/VPN', MetricName='TunnelDataIn')
     for met in response['Metrics']:
-        #print(met.get('Dimensions'))
         for dim in met.get('Dimensions'):
             if dim['Name'] == 'VpnId':
                 print(dim['Value'])
