@@ -1,0 +1,12 @@
+yum install epel-release
+yum update
+yum install wget
+wget repo mysql
+rpm -ivh mysql
+yum update
+yum install mysql-server
+systemctl start mysqld
+yum install python-pip
+pip install pymysql
+mysql-user
+systemctl restart mysql
