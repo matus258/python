@@ -47,7 +47,7 @@ for region in regions:
                                 },
                             ]
                         },
-                        'Period': 300,
+                        'Period': 2592000,
                         'Stat': 'Sum',
                         'Unit': 'Bytes'
                     },
@@ -57,8 +57,7 @@ for region in regions:
             
             StartTime=start_time,
             EndTime=end_time,
-            ScanBy='TimestampDescending',
-            MaxDatapoints=123)
+            ScanBy='TimestampDescending')
 
         for met in r.get('MetricDataResults'):
             for val in met.get('Values'):

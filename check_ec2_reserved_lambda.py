@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 import boto3
 import json
 import csv
@@ -31,7 +29,7 @@ def check_ec2_reserved(session):
                 res.append({'InstanceType': res_ins.get('InstanceType'),'Region': region,'Status': 'A expirar','Date': d })
     return res
 
-    def lambda_handler(event, context):
+def lambda_handler(event, context):
     params = verify_parameters(event, {
         'akid': None, 'aksecret': None, 'alias': None
     })
