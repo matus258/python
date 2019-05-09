@@ -7,7 +7,7 @@ while True:
     elif password == SECRET:
         break
 
-    print('Wrong password!')
+    print('Wro password!')
 
 
 print('Welcome!')
